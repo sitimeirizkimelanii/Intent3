@@ -19,7 +19,23 @@ public class MainActivity extends AppCompatActivity {
                 dialPhoneNumber("082337679036");
             }
         });
+
+        findViewById(R.id.imageViewSMS).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                composeSmsMesseage("Pesan dari SMK Telkom");
+            }
+        });
     }
+
+    private void composeSmsMesseage(String message) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra("sms_body", message);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
+    }
+
 
     private void dialPhoneNumber(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
